@@ -167,7 +167,15 @@ module "project-factory" {
   org_id             = var.organization_id
   billing_account    = var.billing_account
   shared_vpc         = module.host-project.project_id
-  activate_apis      = ["compute.googleapis.com", "container.googleapis.com", "cloudbilling.googleapis.com"]
+  activate_apis      = [
+                        "compute.googleapis.com",
+                        "container.googleapis.com",
+                        "cloudbilling.googleapis.com",
+                        "sqladmin.googleapis.com",
+                        "serviceusage.googleapis.com",
+                        "securitycenter.googleapis.com",
+                        "dlp.googleapis.com"
+                       ]
   credentials_path   = local.credentials_file_path
   shared_vpc_subnets = var.shared_vpc_subnets
 }
