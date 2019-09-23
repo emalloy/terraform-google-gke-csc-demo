@@ -177,7 +177,6 @@ module "project-factory" {
                         "dlp.googleapis.com"
                        ]
   credentials_path   = local.credentials_file_path
-  shared_vpc_subnets = var.shared_vpc_subnets
+  shared_vpc_subnets = module.vpc.subnets_self_links
+
 }
-
-
