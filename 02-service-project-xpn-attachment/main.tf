@@ -26,6 +26,7 @@ module "project-factory" {
     "serviceusage.googleapis.com",
     "securitycenter.googleapis.com",
     "dlp.googleapis.com",
+    "servicenetworking.googleapis.com",
   ]
   credentials_path = local.credentials_file_path
 
