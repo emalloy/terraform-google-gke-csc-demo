@@ -62,6 +62,7 @@ module "host-project" {
     "serviceusage.googleapis.com",
     "securitycenter.googleapis.com",
     "dlp.googleapis.com",
+    "servicenetworking.googleapis.com",
   ]
 
 }
