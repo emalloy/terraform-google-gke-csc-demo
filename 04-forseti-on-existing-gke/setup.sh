@@ -169,6 +169,12 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
     --role="roles/container.admin" \
     --user-output-enabled false
 
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+    --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
+    --role="roles/iam.serviceAccountCreator" \
+    --user-output-enabled false
+
+
 
 if [[ -n "$WITH_ENFORCER" ]]; then
   org_roles=("roles/logging.configWriter" "roles/iam.organizationRoleAdmin")
