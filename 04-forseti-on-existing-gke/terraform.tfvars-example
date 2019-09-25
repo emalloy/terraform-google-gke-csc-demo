@@ -1,0 +1,19 @@
+credentials_path     = ""
+
+
+gsuite_admin_email = ""
+domain = ""
+#config_validator_enable = ""
+org_id = ""
+network         = "projects/#####/global/networks/#####"
+sub_network_name = "projects/#####/regions/#####/subnetworks/#####"
+region = ""
+
+
+network_project_id           = "#####"
+project_id = ""
+gke_cluster_location = "" # if zonal cluster, include zone, eg. us-west1-a
+gke_cluster_name = ""
+
+git_sync_private_ssh_key_file = "" # create with `ssh-keygen -f <filename>`
+gke_service_account = ""
