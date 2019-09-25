@@ -171,7 +171,7 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
 
 gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
     --member="serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
-    --role="roles/iam.serviceAccountCreator" \
+    --role="roles/iam.serviceAccountKeyAdmin" \
     --user-output-enabled false
 
 
