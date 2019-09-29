@@ -163,3 +163,15 @@ module "vpc" {
     },
   ]
 }
+
+
+// cloud router
+
+resource "google_compute_router" "router-us-west1" {
+  name       = "us-west1-router"
+  region     = "us-west1"
+  network    = module.vpc.network_name
+  project = module.host-project.project_id
+}
+
+
