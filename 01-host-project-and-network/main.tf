@@ -175,3 +175,12 @@ resource "google_compute_router" "router-us-west1" {
 }
 
 
+// cloud nat
+
+module "cloud-nat" {
+  source     = "git::https://github.com/terraform-google-modules/terraform-google-cloud-nat.git?ref=83b1cf27a62cb91f9030b1ffb39b35450c637712"
+  router     = google_compute_router.router-us-west1.name
+  project_id = module.host-project.project_id
+  region     = "us-west1"
+  name       = "nat-us-west1"
+}
