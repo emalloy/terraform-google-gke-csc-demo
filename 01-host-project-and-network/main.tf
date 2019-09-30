@@ -184,3 +184,23 @@ module "cloud-nat" {
   region     = "us-west1"
   name       = "nat-us-west1"
 }
+
+// @todo - less permissive :)
+module "firewall-preseed" {
+  source                  = "git::https://github.com/terraform-google-modules/terraform-google-network.git//modules/fabric-net-firewall?ref=master"
+  project_id              = module.host-project.project_id
+  network                 = module.vpc.network_name
+  internal_ranges_enabled = true
+  internal_ranges         = module.vpc.subnets_ips
+
+  internal_allow = [{
+    protocol = "icmp"
+    },
+    {
+      protocol = "tcp"
+    },
+    {
+      protocol = "udp"
+    },
+  ]
+}
