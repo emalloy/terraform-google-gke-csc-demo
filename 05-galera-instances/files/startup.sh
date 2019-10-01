@@ -81,6 +81,13 @@ fi
 
 function galera_conf() {
 
+local HEADER="Metadata-Flavor: Google"
+local URI="http://metadata.google.internal/computeMetadata/v1/instance/attributes/"
+local WSREP_MEMBERS=$(curl -s -H "${HEADER}" "${URI}/wsrep_members")
+local WSREP_CLUSTER_NAME=$(curl -s -H "${HEADER}" "${URI}/wsrep_cluster_name")
+
+
+
 if [[  $(grep $(hostname -I) /etc/mysql/my.cnf ) ]]; then
   echo "Galera is probably already configured. Continue ...";
 else
@@ -90,13 +97,14 @@ else
    /etc/mysql/my.cnf
   cat << EOF > /etc/mysql/conf.d/50-galera.cnf
 [galera]
+binlog_format=row
+wsrep_on=ON
 wsrep_provider=/usr/lib/galera/libgalera_smm.so
 wsrep_cluster_name="${WSREP_CLUSTER_NAME}"
 wsrep_cluster_address="gcomm://${WSREP_MEMBERS}"
 wsrep_node_address=$(hostname -I)
 wsrep_node_name="$(hostname -s)"
 wsrep_sst_method=rsync
-binlog_format=row
 EOF
 fi
 }
