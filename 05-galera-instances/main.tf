@@ -42,13 +42,11 @@ module "instance_template" {
   name_prefix          = "galera"
   machine_type         = "n1-standard-2"
   source_image_project = "debian-cloud"
-  source_image_family  = "debian-10"
+  source_image_family  = "debian-9"
   tags = [
     "ssh",
     "sql",
     "sql-replication",
-    "sql-ist",
-    "sql-sst"
   ]
   disk_size_gb = 100
   disk_type    = "pd-ssd"
