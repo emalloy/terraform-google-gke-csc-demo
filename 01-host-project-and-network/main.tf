@@ -204,3 +204,35 @@ module "firewall-preseed" {
     },
   ]
 }
+
+
+resource "google_compute_firewall" "allow-tag-sql" {
+  count         = length(module.vpc.subnets_ips) > 0 ? 1 : 0
+  name          = "${module.vpc.network_name}-ingress-tag-sql"
+  description   = "Allow SQL to machines with the 'sql' tag"
+  network       = module.vpc.network_name
+  project       = module.host-project.project_id
+  source_ranges = module.vpc.subnets_ips
+  target_tags   = ["sql"]
+
+  allow {
+    protocol = "tcp"
+    ports    = ["3306"]
+  }
+}
+
+resource "google_compute_firewall" "allow-tag-sql-replication" {
+  count         = length(module.vpc.subnets_ips) > 0 ? 1 : 0
+  name          = "${module.vpc.network_name}-ingress-tag-sql-replication"
+  description   = "Allow SQL Replication to machines with the 'sql-replication' tag"
+  network       = module.vpc.network_name
+  project       = module.host-project.project_id
+  source_ranges = module.vpc.subnets_ips
+  target_tags   = ["sql-replication"]
+  allow {
+    protocol = "tcp"
+    ports = ["4444",
+      "4567",
+    "4568"]
+  }
+}
