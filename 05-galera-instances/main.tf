@@ -59,6 +59,10 @@ module "instance_template" {
       boot         = "false"
     }
   ]
+  metadata = {
+    wsrep_members      = join(",", var.static_ips)
+    wsrep_cluster_name = "${var.cluster_name}"
+  }
   startup_script = "${file(var.startup_script)}"
 }
 
@@ -66,7 +70,8 @@ module "compute_instance" {
   source     = "git::https://github.com/terraform-google-modules/terraform-google-vm.git//modules/compute_instance?ref=70949e5dcc70a5d06baf04f4aefc9704420656b1"
   subnetwork = var.subnetwork
 
-  num_instances     = 1
+  //  num_instances     = 3
+  static_ips        = "${var.static_ips}"
   hostname          = "galera"
   instance_template = module.instance_template.self_link
 

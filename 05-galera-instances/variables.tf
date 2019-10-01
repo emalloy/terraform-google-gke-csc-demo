@@ -21,3 +21,11 @@ variable "region" {
 variable "startup_script" {
   description = "path to startup script to attach to instance template"
 }
+
+variable "static_ips" {
+  description = "specify the static ip members of the galera cluster to be created"
+}
+
+variable "cluster_name" {
+  description = "cluster_name"
+}
