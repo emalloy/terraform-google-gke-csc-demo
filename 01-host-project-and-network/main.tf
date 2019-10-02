@@ -25,9 +25,14 @@
 locals {
   credentials_file_path = var.credentials_path
   subnet_01             = "${var.network_name}-subnet-01"
+  subnet_01_secondary        = ["10.15.0.0/16","10.16.0.0/16"]
   subnet_02             = "${var.network_name}-subnet-02"
+  subnet_02_secondary        = ["10.17.0.0/16","10.18.0.0/16"]
   subnet_03             = "${var.network_name}-subnet-03"
+  subnet_03_secondary        = ["10.19.0.0/16","10.20.0.0/16"]
   subnet_04             = "${var.network_name}-subnet-04"
+   subnet_04_secondary        = ["10.21.0.0/16","10.22.0.0/16"]
+
 }
 
 /******************************************
@@ -113,41 +118,41 @@ module "vpc" {
     "${local.subnet_01}" = [
       {
         range_name    = "${local.subnet_01}-01"
-        ip_cidr_range = "10.15.0.0/16"
+        ip_cidr_range = "${local.subnet_01_secondary[0]}"
       },
       {
         range_name    = "${local.subnet_01}-02"
-        ip_cidr_range = "10.16.0.0/16"
+        ip_cidr_range = "${local.subnet_01_secondary[1]}"
       },
     ]
     "${local.subnet_02}" = [
       {
         range_name    = "${local.subnet_02}-01"
-        ip_cidr_range = "10.17.0.0/16"
+        ip_cidr_range = "${local.subnet_02_secondary[0]}"
       },
       {
         range_name    = "${local.subnet_02}-02"
-        ip_cidr_range = "10.18.0.0/16"
+        ip_cidr_range = "${local.subnet_02_secondary[1]}"
       },
     ]
     "${local.subnet_03}" = [
       {
         range_name    = "${local.subnet_03}-01"
-        ip_cidr_range = "10.19.0.0/16"
+        ip_cidr_range = "${local.subnet_03_secondary[0]}"
       },
       {
         range_name    = "${local.subnet_03}-02"
-        ip_cidr_range = "10.20.0.0/16"
+        ip_cidr_range = "${local.subnet_03_secondary[1]}"
       },
     ]
     "${local.subnet_04}" = [
       {
         range_name    = "${local.subnet_04}-01"
-        ip_cidr_range = "10.21.0.0/16"
+        ip_cidr_range = "${local.subnet_04_secondary[0]}"
       },
       {
         range_name    = "${local.subnet_04}-02"
-        ip_cidr_range = "10.22.0.0/16"
+        ip_cidr_range = "${local.subnet_04_secondary[1]}"
       },
     ]
   }
