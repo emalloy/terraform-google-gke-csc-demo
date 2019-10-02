@@ -232,7 +232,7 @@ resource "google_compute_firewall" "allow-tag-sql-replication" {
   description   = "Allow SQL Replication to machines with the 'sql-replication' tag"
   network       = module.vpc.network_name
   project       = module.host-project.project_id
-  source_ranges = module.vpc.subnets_ips
+  source_ranges = concat(module.vpc.subnets_ips,local.subnet_04_secondary)
   target_tags   = ["sql-replication"]
   allow {
     protocol = "tcp"
