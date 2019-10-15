@@ -109,6 +109,34 @@ EOF
 fi
 }
 
+02_maxscale_users() {
+
+cat << EOF > /tmp/02_maxscale_users.sh
+
+  #based on https://github.com/mariadb-corporation/maxscale-docker
+  # https://mariadb.com/kb/en/mariadb-maxscale-23-setting-up-mariadb-maxscale/
+  # poc, these values should live somewhere in process and in-perpetuity
+local MAXSCALE_USER="'maxscale'"
+local MAXSCALE_PASS="maxscaledemo"
+local MAXSCALE_PERMITTED_CIDR="'10.21.%'"
+local FE_DB_NAME="wordpress-maxscale"
+
+cat << EOF > /tmp/maxscale_users.sql
+CREATE USER ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR} IDENTIFIED BY "${MAXSCALE_PASS}";
+GRANT SELECT ON mysql.user TO ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR};
+GRANT SELECT ON mysql.db TO ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR};
+GRANT SELECT ON mysql.tables_priv TO ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR};
+GRANT SELECT ON mysql.roles_mapping TO ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR};
+GRANT SHOW DATABASES ON *.* TO ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR};
+# sample database and grant
+CREATE DATABASE \`${FE_DB_NAME}\`;
+CREATE USER ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR} IDENTIFIED BY "${MAXSCALE_PASS}";
+GRANT ALL PRIVILEGES ON \`${FE_DB_NAME}\`.* to ${MAXSCALE_USER}@${MAXSCALE_PERMITTED_CIDR};
+EOF
+cat /tmp/maxscale_users.sql | mysql -uroot
+
+EOF
+}
 
 function 03_config_stackdriver_agent() {
 
@@ -155,5 +183,6 @@ monitoring_agent
 galera_repo
 galera_conf
 
+02_maxscale_users
 03_config_stackdriver_agent
 
