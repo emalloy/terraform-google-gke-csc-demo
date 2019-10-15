@@ -58,13 +58,16 @@ variable "git_sync_wait" {
 
 variable "gke_cluster_ca_cert" {
   description = "base64 encoded gke cluster client ca cert"
+  default     = ""
 }
 variable "gke_client_access_token" {
   description = "base64 encoded gke cluster client access token"
+  default     = ""
 }
 
 variable "gke_endpoint" {
   description = "ipaddr or hostname of existing gke endpoint"
+  default     = ""
 }
 
 variable "gke_cluster_name" {
@@ -81,9 +84,6 @@ variable "gke_service_account" {
   default     = "create"
 }
 
-variable "xpn_project_id" {
-  description = "project id of the host xpn network project"
-}
 
 variable "network_project_id" {
   description = "project id of the host xpn network project"
@@ -91,6 +91,7 @@ variable "network_project_id" {
 
 variable "suffix" {
   description = "descriptive suffix"
+  default = ""
 }
 
 
