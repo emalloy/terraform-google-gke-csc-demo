@@ -1,0 +1,9 @@
+subnetwork       = "projects/#####/regions/#####/subnetworks/#####"
+credentials_path = ""
+project_id       = ""
+host_project_id  = ""
+region           = ""
+startup_script = "files/startup.sh"
+static_ips = ["", "", ""] # can be more than 3
+cluster_name = ""
+

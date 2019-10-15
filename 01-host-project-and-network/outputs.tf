@@ -33,3 +33,8 @@ output "subnets_self_links" {
   value       = module.vpc.subnets_self_links
   description = "The self-links of subnets being created"
 }
+
+output "subnets_self_links_secondary_ranges" {
+  value = module.vpc.subnets_secondary_ranges
+  description = "The secondary ranges of the subnets created"
+}
