@@ -1,0 +1,10 @@
+credentials_path     = ""
+project_id = ""
+cluster_name_suffix = ""
+region = ""
+zones = [""]
+network_project_id           = ""
+network         = ""
+subnetwork = ""
+ip_range_pods = ""
+ip_range_services = ""
