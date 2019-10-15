@@ -72,7 +72,7 @@ provider "kubernetes" {
 provider "helm" {
   version         = "~> 0.10.0"
   service_account = "${kubernetes_service_account.tiller.metadata.0.name}"
-  namespace = "${kubernetes_service_account.tiller.metadata.0.namespace}"
+  namespace       = "${kubernetes_service_account.tiller.metadata.0.namespace}"
   kubernetes {
     load_config_file       = false
     host                   = "https://${data.google_container_cluster.existing_cluster.endpoint}"
@@ -120,7 +120,7 @@ resource "kubernetes_cluster_role_binding" "tiller" {
 //*****************************************
 
 module "forseti-on-gke" {
-  source = "git::https://github.com/forseti-security/terraform-google-forseti.git//modules/on_gke?ref=v4.2.0"
+  source                   = "git::https://github.com/forseti-security/terraform-google-forseti.git//modules/on_gke?ref=v4.2.0"
   config_validator_enabled = "${var.config_validator_enabled}"
 
   forseti_client_service_account     = "${module.forseti.forseti-client-service-account}"
